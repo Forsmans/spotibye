@@ -33,7 +33,7 @@ python3 --version
 Clone the repository:
 
 ```bash
-git clone <your-repo>
+git clone https://github.com/Forsmans/spotibye.git
 cd Spotibye
 ```
 
