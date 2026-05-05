@@ -1,58 +1,155 @@
 # Spotibye
 
-Download your Spotify playlists as MP3s using a CSV export from Exportify.
+Download your Spotify playlists as MP3 files using a CSV export from Exportify.
 
+## 🔗 Export playlists
+
+Use Exportify to export your playlists as CSV files:
 https://exportify.net/
 
 ---
 
-## Requirements
+## ⚙️ Requirements
 
-- Python 3.10+
-- [ffmpeg](https://ffmpeg.org/) — install via Homebrew:
-  ```bash
-  brew install ffmpeg
-  ```
+* Python **3.10 or higher**
+* ffmpeg
 
----
-
-## Setup
+Install ffmpeg (macOS with Homebrew):
 
 ```bash
-git clone <your-repo>
-cd Spotiq
-python3 -m venv .venv
-source .venv/bin/activate
-pip install yt-dlp pandas mutagen
+brew install ffmpeg
+```
+
+Check Python version:
+
+```bash
+python3 --version
 ```
 
 ---
 
-## Export your Spotify playlists
+## 🚀 Setup
 
-1. Go to [exportify.net](https://exportify.net)
-2. Log in with Spotify
-3. Click **Export All** to download a zip of all your playlists as CSV files
-4. Place the CSV file you want to download into the `Spotiq` folder
+Clone the repository:
+
+```bash
+git clone <your-repo>
+cd Spotibye
+```
+
+Create a virtual environment with Python 3.10+:
+
+```bash
+python3.11 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-## Usage
+## 📥 Export your Spotify playlists
+
+1. Go to https://exportify.net/
+2. Log in with Spotify
+3. Click **Export All**
+4. Download and unzip the CSV files
+5. Place your desired CSV file in the project folder
+
+---
+
+## ▶️ Usage
+
+Run the downloader:
 
 ```bash
 python main.py --csv playlist.csv --out downloads
 ```
 
-| Flag | Default | Description |
-|------|---------|-------------|
-| `--csv` | `playlist.csv` | Path to your Exportify CSV file |
-| `--out` | `downloads` | Folder where MP3s will be saved | 
+### Options
+
+| Flag  | Default      | Description                 |
+| ----- | ------------ | --------------------------- |
+| --csv | playlist.csv | Path to Exportify CSV file  |
+| --out | downloads    | Output folder for MP3 files |
 
 ---
 
-## Output
+## 📁 Output
 
-- MP3 files are saved to the `--out` folder
-- Any failed downloads are listed in `failed.log` after each run
-- Songs already in the output folder are skipped automatically
-# spotibye
+* MP3 files are saved in the specified output folder
+* Existing files are skipped automatically
+* Failed downloads are logged in `failed.log`
+
+---
+
+## ⚠️ Troubleshooting
+
+### Python version warning
+
+If you see:
+
+```
+Support for Python 3.9 has been deprecated
+```
+
+You are using the wrong Python version. Recreate your virtual environment with Python 3.10+.
+
+---
+
+### Missing modules (e.g. pandas)
+
+If you see:
+
+```
+ModuleNotFoundError: No module named 'pandas'
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### Downloads failing (HTTP 403)
+
+This is usually caused by an outdated version of yt-dlp.
+
+Update it:
+
+```bash
+pip install -U yt-dlp
+```
+
+---
+
+### Process suspended (^Z)
+
+If the script stops and shows `^Z`, it was paused.
+
+Resume:
+
+```bash
+fg
+```
+
+---
+
+## 📝 Notes
+
+* Requires a working internet connection
+* Download success depends on availability of tracks on YouTube
+* Metadata is applied using mutagen
+
+---
